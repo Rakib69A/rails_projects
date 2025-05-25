@@ -1,0 +1,33 @@
+<h1 class="mb-4">নতুন পোস্ট</h1>
+
+<div class="card p-4 shadow">
+  <%= form_with model: @post, local: true, class: "needs-validation" do |form| %>
+    
+    <% if @post.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(@post.errors.count, "error") %> পাওয়া গেছে:</h4>
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :content, class: "form-label" %>
+      <%= form.text_area :content, class: "form-control", rows: 5, required: true %>
+    </div>
+
+    <div>
+      <%= form.submit "পোস্ট জমা দিন", class: "btn btn-primary" %>
+      <%= link_to 'Back', posts_path, class: "btn btn-secondary ms-2" %>
+    </div>
+
+  <% end %>
+</div>

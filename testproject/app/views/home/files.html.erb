@@ -1,0 +1,8 @@
+<h1> List of Files </h1>
+<ul>
+    @<% @files.each do |file| %>
+        <li> <%= file %> </li>
+    <% end %>
+</ul>
+
+<%= link_to "Back to Home", root_path %>

@@ -1,0 +1,55 @@
+<!-- app/views/layouts/application.html.erb -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Management</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_importmap_tags %>
+
+  </head>
+
+  <body class="bg-gray-100 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow mb-6">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-blue-600">
+          <%= link_to "StudentMgmt", root_path %>
+        </h1>
+        <div class="space-x-4">
+          <%= link_to "Students", students_path, class: "text-gray-700 hover:text-blue-500" %>
+          <%= link_to "Courses", courses_path, class: "text-gray-700 hover:text-blue-500" %>
+          <%= link_to "Enroll", new_enrollment_path, class: "text-gray-700 hover:text-blue-500" %>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="max-w-7xl mx-auto px-4">
+      <%= render 'layouts/flash' %>
+    </div>
+
+    <!-- Page Content -->
+    <main class="max-w-7xl mx-auto px-4">
+      <%= yield %>
+      <div class="space-x-4">
+
+  <% if user_signed_in? %>
+    <span class="text-gray-700">Hi, <%= current_user.email %></span>
+    <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+
+
+  <% else %>
+    <%= link_to "Login", new_user_session_path, class: "text-gray-700 hover:text-blue-500" %>
+    <%= link_to "Sign Up", new_user_registration_path, class: "text-gray-700 hover:text-blue-500" %>
+  <% end %>
+</div>
+
+    </main>
+  </body>
+</html>

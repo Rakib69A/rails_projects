@@ -1,0 +1,15 @@
+<h1 class="text-2xl font-bold mb-4">Enroll Student in Courses</h1>
+
+<%= form_with url: enrollments_path, method: :post, local: true, class: "space-y-4" do %>
+  <div>
+    <%= label_tag :student_id, "Select Student", class: "block font-semibold mb-1" %>
+    <%= select_tag :student_id, options_from_collection_for_select(@students, :id, :name), prompt: "Choose a student", class: "w-full border border-gray-300 rounded px-3 py-2" %>
+  </div>
+
+  <div>
+    <%= label_tag :course_ids, "Select Courses", class: "block font-semibold mb-1" %>
+    <%= select_tag :course_ids, options_from_collection_for_select(@courses, :id, :title), multiple: true, class: "w-full border border-gray-300 rounded px-3 py-2 h-32" %>
+  </div>
+
+  <%= submit_tag "Enroll", class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" %>
+<% end %>
